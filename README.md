@@ -5,8 +5,7 @@
 This project predicts stock volatility using historical market data and machine learning techniques.
 It combines financial technical indicators, feature engineering, and XGBoost regression models to forecast short-term volatility.
 
-Additionally, an interactive Streamlit web app is included, allowing users to input stock tickers and visualize predictions in real time.
-
+A full-stack web application with React frontend and FastAPI backend is included for interactive use.
 
 
 
@@ -14,53 +13,54 @@ Additionally, an interactive Streamlit web app is included, allowing users to in
 
 1. 📊 Data Collection: Fetches stock data from Yahoo Finance (via yfinance).
 2. 🧹 Data Preparation: Cleans data and creates lag features.
-3. 🛠 Feature Engineering: Adds technical indicators, rolling statistics, returns, and volatility measures.
+3. 🛠 Feature Engineering: Adds technical indicators (RSI, MACD, Bollinger Bands), rolling statistics, returns, and volatility measures.
 4. 🤖 Modeling: Trains an XGBoost Regressor to predict volatility.
 5. 📉 Evaluation: Reports RMSE and R², and visualizes predictions vs actuals.
-6. 🌐 Deployment: Provides a Streamlit dashboard for interactive use.
-
+6. 🌐 Deployment: Full-stack React + FastAPI web application.
 
 
 
 🛠 Tech Stack
 
-1. Python
-2. yfinance – Stock market data
-3. pandas, numpy – Data manipulation
-4. ta (Technical Analysis library) – Indicators like RSI, MACD, Bollinger Bands
-5. scikit-learn – Train-test split, metrics
-6. xgboost – Machine learning model
-7. matplotlib – Visualization
-9. streamlit – Web app for deployment
+1. Frontend: React + Vite, Tailwind CSS, Recharts
+2. Backend: Python FastAPI, Uvicorn
+3. yfinance – Stock market data
+4. pandas, numpy – Data manipulation
+5. ta (Technical Analysis library) – Indicators like RSI, MACD, Bollinger Bands
+6. scikit-learn – Train-test split, metrics
+7. xgboost – Machine learning model
 
 
 
+▶️ Quick Start (Docker)
 
-▶️ Usage
+```bash
+git clone <your-repo-url>
+cd Stock-Volatility-Prediction-with-XGBoost
+docker-compose up --build
+```
 
-1. Run from Command Line
-python main.py
+Frontend → http://localhost:5173
+Backend → http://localhost:8000
+API Docs → http://localhost:8000/docs
 
 
-a. You will be prompted to enter:
-b. Stock ticker (e.g., AAPL)
-c. Start date (YYYY-MM-DD)
-d. End date (YYYY-MM-DD)
-e. The script will:
-f. Fetch stock data
-g. Train the XGBoost model
-h. Print RMSE and R²
 
-2. Run Streamlit App
-streamlit run main.py
-The web app will let you:
+▶️ Local Dev (no Docker)
 
-a. Enter ticker symbol
-b. Select start and end dates
-c. View predictions interactively
-d. See evaluation metrics (RMSE, R²)
-e. Explore feature importance
+Backend:
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
 
+Frontend:
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
 
 
@@ -78,10 +78,9 @@ Outputs include:
 
 
 
-
 🔮 Future Improvements
 
 1. Add hyperparameter tuning for XGBoost
 2. Integrate deep learning models (LSTM, Transformers)
-3. Extend Streamlit app with portfolio-level analysis
+3. Extend frontend with portfolio-level analysis
 4. Add sentiment analysis (news & social media) as features

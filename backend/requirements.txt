@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+yfinance
+pandas
+numpy
+ta
+scikit-learn
+xgboost
