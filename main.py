@@ -42,18 +42,39 @@ def run_streamlit():
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "streamlit":
         run_streamlit()
-    else:
-        print("Enter stock ticker, start date (YYYY-MM-DD), and end date (YYYY-MM-DD):")
-        ticker = input("Ticker: ").strip().upper()
-        start = input("Start Date (YYYY-MM-DD): ").strip()
-        end = input("End Date (YYYY-MM-DD): ").strip()
+    elif len(sys.argv) > 1 and sys.argv[1] == "tune":
+        from ml.tune import tune_hyperparameters
+
+        if len(sys.argv) < 5:
+            print("Usage: python main.py tune TICKER START_DATE END_DATE [--folds N]")
+            sys.exit(1)
+
+        ticker = sys.argv[2].upper()
+        start = sys.argv[3]
+        end = sys.argv[4]
+        folds = 3
+        if "--folds" in sys.argv:
+            idx = sys.argv.index("--folds")
+            if idx + 1 < len(sys.argv):
+                folds = int(sys.argv[idx + 1])
+
         try:
-            result = run_prediction(ticker, start, end)
-            print(f"Ticker: {result['ticker']}")
-            print(f"RMSE: {result['rmse']:.4f}")
-            print(f"R²: {result['r2']:.4f}")
-            print(f"Train rows: {result['train_rows']}")
-            print(f"Test rows: {result['test_rows']}")
-            print(f"Total rows: {result['total_rows']}")
+            result = tune_hyperparameters(ticker, start, end, cv_folds=folds)
+            print(f"\nTuning results for {ticker}:")
+            print(f"  Best CV score (RMSE): {result['best_score']:.6f}")
+            print(f"  Best params: {result['best_params']}")
+            print(f"  CV folds: {result['cv_folds']}")
+            print(f"  Total rows: {result['total_rows']}")
+            print(f"  Combinations tested: {len(result['cv_results'])}")
+            print("\nAll results:")
+            for r in result["cv_results"]:
+                print(f"    {r['params']}  RMSE={r['mean_test_score']:.6f} ±{r['std_test_score']:.6f}")
         except ValueError as e:
             print(f"Error: {e}")
+            sys.exit(1)
+    else:
+        print("Usage:")
+        print("  python main.py                    # CLI mode (interactive)")
+        print("  python main.py streamlit          # Streamlit UI")
+        print("  python main.py tune TICKER START END [--folds N]  # Hyperparameter tuning")
+        sys.exit(1)
