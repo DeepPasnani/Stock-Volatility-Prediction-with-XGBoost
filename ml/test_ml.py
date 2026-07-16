@@ -37,7 +37,44 @@ def test_prepare_data():
     assert result["Close_lag1"].iloc[5] == 4.0
 
 
+def test_engineer_features():
+    import pandas as pd
+    import numpy as np
+    from ml.data import prepare_data
+    from ml.features import engineer_features
+
+    np.random.seed(42)
+    dates = pd.date_range("2020-01-01", periods=50, freq="D")
+    data = pd.DataFrame({
+        "Open": np.random.randn(50) + 100,
+        "High": np.random.randn(50) + 101,
+        "Low": np.random.randn(50) + 99,
+        "Close": np.random.randn(50) + 100,
+        "Volume": np.random.randint(100000, 500000, 50),
+    }, index=dates)
+
+    prepared = prepare_data(data)
+    result = engineer_features(prepared)
+
+    assert "RSI" in result.columns
+    assert "MACD" in result.columns
+    assert "MACD_signal" in result.columns
+    assert "MACD_diff" in result.columns
+    assert "BB_high" in result.columns
+    assert "BB_low" in result.columns
+    assert "BB_mid" in result.columns
+    assert "BB_width" in result.columns
+    assert "rolling_mean_5" in result.columns
+    assert "rolling_std_5" in result.columns
+    assert "return_1" in result.columns
+    assert "return_3" in result.columns
+    assert "return_5" in result.columns
+    assert "volatility" in result.columns
+    assert len(result) > 0
+
+
 if __name__ == "__main__":
     test_config_defaults()
     test_prepare_data()
+    test_engineer_features()
     print("All tests passed")
