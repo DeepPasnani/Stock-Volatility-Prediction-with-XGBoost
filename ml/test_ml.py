@@ -15,6 +15,29 @@ def test_config_defaults():
     assert cfg.random_state == 42
 
 
+def test_prepare_data():
+    import pandas as pd
+    from ml.data import prepare_data
+
+    dates = pd.date_range("2020-01-01", periods=20, freq="D")
+    data = pd.DataFrame({
+        "Open": range(20),
+        "High": range(1, 21),
+        "Low": range(20),
+        "Close": range(20),
+        "Volume": [100] * 20,
+    }, index=dates)
+
+    result = prepare_data(data.copy())
+    assert "Close_lag1" in result.columns
+    assert "Close_lag3" in result.columns
+    assert "Close_lag5" in result.columns
+    assert "Open_lag1" in result.columns
+    assert "Volume_lag5" in result.columns
+    assert result["Close_lag1"].iloc[5] == 4.0
+
+
 if __name__ == "__main__":
     test_config_defaults()
-    print("Config tests passed")
+    test_prepare_data()
+    print("All tests passed")
