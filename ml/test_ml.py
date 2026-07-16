@@ -111,10 +111,40 @@ def test_train_model():
     assert all(np.isfinite(y_pred))
 
 
+def test_pipeline_response_shape():
+    """Test that run_prediction returns the expected dict shape with real data."""
+    from ml.pipeline import run_prediction
+
+    result = run_prediction("AAPL", "2023-01-01", "2024-06-01")
+
+    assert isinstance(result, dict)
+    assert result["ticker"] == "AAPL"
+    assert "rmse" in result
+    assert "r2" in result
+    assert "predictions" in result
+    assert "feature_importance" in result
+    assert "total_rows" in result
+    assert "train_rows" in result
+    assert "test_rows" in result
+    assert result["r2"] is not None
+
+    if result["predictions"]:
+        first = result["predictions"][0]
+        assert "date" in first
+        assert "actual" in first
+        assert "predicted" in first
+
+    if result["feature_importance"]:
+        first = result["feature_importance"][0]
+        assert "feature" in first
+        assert "importance" in first
+
+
 if __name__ == "__main__":
     test_config_defaults()
     test_prepare_data()
     test_engineer_features()
     test_split_data()
     test_train_model()
+    test_pipeline_response_shape()
     print("All tests passed")
