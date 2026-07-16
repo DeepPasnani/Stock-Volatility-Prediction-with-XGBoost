@@ -140,6 +140,27 @@ def test_pipeline_response_shape():
         assert "importance" in first
 
 
+def test_tune_hyperparameters():
+    from ml.tune import tune_hyperparameters
+
+    small_grid = {
+        "n_estimators": [50],
+        "max_depth": [3],
+        "learning_rate": [0.1],
+    }
+    result = tune_hyperparameters("AAPL", "2023-01-01", "2024-06-01", param_grid=small_grid, cv_folds=2)
+
+    assert isinstance(result, dict)
+    assert "best_params" in result
+    assert "best_score" in result
+    assert "cv_results" in result
+    assert "ticker" in result
+    assert result["ticker"] == "AAPL"
+    assert result["best_score"] > 0
+    assert len(result["cv_results"]) == 1
+    assert "n_estimators" in result["best_params"]
+
+
 if __name__ == "__main__":
     test_config_defaults()
     test_prepare_data()
@@ -147,4 +168,5 @@ if __name__ == "__main__":
     test_split_data()
     test_train_model()
     test_pipeline_response_shape()
+    test_tune_hyperparameters()
     print("All tests passed")
