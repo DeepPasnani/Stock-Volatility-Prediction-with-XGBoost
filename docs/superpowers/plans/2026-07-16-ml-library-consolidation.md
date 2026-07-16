@@ -54,9 +54,8 @@ class MlConfig:
 
 ```python
 from .config import MlConfig
-from .pipeline import run_prediction, load_data
 
-__all__ = ["MlConfig", "run_prediction", "load_data"]
+__all__ = ["MlConfig"]
 ```
 
 - [ ] **Step 3: Write test in `ml/test_ml.py`**
