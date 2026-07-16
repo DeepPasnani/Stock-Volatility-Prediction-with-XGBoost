@@ -73,8 +73,48 @@ def test_engineer_features():
     assert len(result) > 0
 
 
+def test_split_data():
+    import pandas as pd
+    import numpy as np
+    from ml.train import split_data
+
+    np.random.seed(42)
+    dates = pd.date_range("2020-01-01", periods=100, freq="D")
+    data = pd.DataFrame({
+        "Close": np.random.randn(100) + 100,
+        "volatility": np.random.rand(100) * 0.1,
+    }, index=dates)
+
+    X_train, X_test, y_train, y_test = split_data(data)
+    assert len(X_train) == 80
+    assert len(X_test) == 20
+    assert "volatility" not in X_train.columns
+
+
+def test_train_model():
+    import pandas as pd
+    import numpy as np
+    from ml.train import train_model, split_data
+
+    np.random.seed(42)
+    dates = pd.date_range("2020-01-01", periods=100, freq="D")
+    data = pd.DataFrame({
+        "Close": np.random.randn(100) + 100,
+        "return_1": np.random.randn(100) * 0.01,
+        "volatility": np.random.rand(100) * 0.1,
+    }, index=dates)
+
+    X_train, X_test, y_train, y_test = split_data(data)
+    model = train_model(X_train, y_train)
+    y_pred = model.predict(X_test)
+    assert len(y_pred) == 20
+    assert all(np.isfinite(y_pred))
+
+
 if __name__ == "__main__":
     test_config_defaults()
     test_prepare_data()
     test_engineer_features()
+    test_split_data()
+    test_train_model()
     print("All tests passed")
