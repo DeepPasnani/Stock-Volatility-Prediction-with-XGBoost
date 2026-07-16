@@ -1,22 +1,17 @@
 import { useState } from 'react'
 import { SearchForm } from './components/SearchForm'
-import { MetricsPanel } from './components/MetricsPanel'
-import { PredictionChart } from './components/PredictionChart'
-import { FeatureChart } from './components/FeatureChart'
+import { ComparisonTable } from './components/ComparisonTable'
+import { ResultsAccordion } from './components/ResultsAccordion'
 import { LoadingState } from './components/LoadingState'
-import { usePredict } from './hooks/usePredict'
+import { usePredictions } from './hooks/usePredictions'
 
 function App() {
-  const { data, loading, error, predict, reset } = usePredict()
-  const [currentTicker, setCurrentTicker] = useState('AAPL')
+  const { results, loading, progress, errors, run, reset } = usePredictions()
+  const [hasRun, setHasRun] = useState(false)
 
-  const handleSubmit = (ticker, startDate, endDate) => {
-    setCurrentTicker(ticker)
-    predict(ticker, startDate, endDate)
-  }
-
-  const handleRetry = () => {
-    reset()
+  const handleSubmit = (tickers, startDate, endDate) => {
+    setHasRun(true)
+    run(tickers, startDate, endDate)
   }
 
   return (
@@ -35,38 +30,47 @@ function App() {
           <SearchForm onSubmit={handleSubmit} loading={loading} />
         </section>
 
-        {loading && <LoadingState ticker={currentTicker} />}
-
-        {error && (
-          <div className="bg-[#111827] border border-red-500/50 p-4 mb-8">
-            <div className="flex items-center justify-between">
-              <div className="font-mono text-sm text-red-400">
-                <span className="text-red-500">ERROR:</span> {error}
-              </div>
-              <button
-                onClick={handleRetry}
-                className="font-mono text-xs text-[#22d3ee] hover:underline uppercase"
-              >
-                Try Again
-              </button>
-            </div>
-          </div>
+        {loading && (
+          <section className="mb-8">
+            <LoadingState current={progress.current} total={progress.total} ticker={progress.ticker} />
+          </section>
         )}
 
-        {data && !loading && (
+        {Object.keys(errors).length > 0 && (
+          <section className="mb-8">
+            {Object.entries(errors).map(([ticker, msg]) => (
+              <div key={ticker} className="bg-[#111827] border border-red-500/50 p-4 mb-2">
+                <div className="font-mono text-sm text-red-400">
+                  <span className="text-red-500">{ticker}:</span> {msg}
+                </div>
+              </div>
+            ))}
+          </section>
+        )}
+
+        {results.length > 0 && !loading && (
           <>
-            <section className="mb-8">
-              <MetricsPanel data={data} />
-            </section>
+            {hasRun && results.length > 1 && (
+              <section className="mb-8">
+                <h3 className="text-xs uppercase tracking-tight text-gray-400 font-mono mb-3">Comparison</h3>
+                <ComparisonTable results={results} />
+              </section>
+            )}
 
             <section className="mb-8">
-              <PredictionChart data={data} />
-            </section>
-
-            <section className="mb-8">
-              <FeatureChart data={data} />
+              <h3 className="text-xs uppercase tracking-tight text-gray-400 font-mono mb-3">
+                {results.length === 1 ? 'Results' : 'Details'}
+              </h3>
+              <ResultsAccordion results={results} />
             </section>
           </>
+        )}
+
+        {!hasRun && !loading && (
+          <div className="text-center text-gray-500 font-mono text-sm mt-20">
+            <p>Enter ticker symbols above to analyze volatility.</p>
+            <p className="mt-1">Try <span className="text-[#22d3ee]">AAPL</span> or <span className="text-[#22d3ee]">AAPL,MSFT,GOOG</span>.</p>
+          </div>
         )}
       </div>
     </div>
