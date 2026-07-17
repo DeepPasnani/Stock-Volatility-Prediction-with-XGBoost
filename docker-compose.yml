@@ -2,7 +2,7 @@ services:
   app:
     build: .
     ports:
-      - "8090:8000"
+      - "2010:8000"
     working_dir: /app/backend
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
     volumes:
