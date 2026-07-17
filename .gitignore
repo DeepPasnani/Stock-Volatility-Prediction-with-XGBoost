@@ -1,9 +1,72 @@
+# --- Python (backend/ml) ---
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
 .venv/
+ENV/
+*.egg-info/
+.eggs/
+pip-log.txt
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# --- Node / Frontend (Vite/React) ---
 node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
 dist/
-.superpowers
-.agents
-.github
-.imppeccable
-.claude
+build/
+.turbo/
+*.tsbuildinfo
+
+# --- Env & secrets ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# --- Docker ---
+*.log
+docker-compose.override.yml
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Editor / IDE ---
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+
+# --- Agent / tooling directories (already caught .superpowers, extend similarly) ---
+.superpowers/
+.agents/cache/
+skills-lock.json
+
+# --- Model artifacts (if ml/ produces large files) ---
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.onnx
+ml/checkpoints/
+ml/outputs/
+
+# --- Misc build artifacts ---
+*.zip
+*.tar.gz
