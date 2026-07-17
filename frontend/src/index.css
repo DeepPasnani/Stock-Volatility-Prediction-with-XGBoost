@@ -1,62 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700&display=swap');
 @import "tailwindcss";
 
-/* ---- Design tokens (Tailwind v4 @theme) ---- */
-@theme {
-  --color-ink: #0b0f1a;
-  --color-surface: #111827;
-  --color-edge: #1e293b;
-  --color-stroke: #334155;
-  --color-accent: #22d3ee;
-  --color-accent-muted: #155e75;
-  --color-orange: #f97316;
-  --color-muted: #9ca3af;
-  --color-foreground: #d1d5db;
-  --color-white: #f8fafc;
-  --color-green-bright: #4ade80;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700&display=swap');
 
-  --font-display: 'Syne', sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+* {
+  box-sizing: border-box;
 }
-
-/* ---- CSS custom properties (for inline styles in chart tooltips) ---- */
-:root {
-  --ink: #0b0f1a;
-  --surface: #111827;
-  --border: #1e293b;
-  --stroke: #334155;
-  --accent: #22d3ee;
-  --accent-muted: #155e75;
-  --orange: #f97316;
-  --muted: #9ca3af;
-  --foreground: #d1d5db;
-  --white: #f8fafc;
-  --green-bright: #4ade80;
-  --red: #ef4444;
-}
-
-* { box-sizing: border-box; }
 
 body {
   margin: 0;
-  background-color: var(--ink);
-  color: var(--foreground);
-  font-family: var(--font-mono);
+  background-color: #0b0f1a;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.5;
 }
 
-/* Focus ring — consistent across all interactive elements */
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-:focus:not(:focus-visible) {
-  outline: none;
-}
-
-/* Invert date picker icon for dark bg */
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   cursor: pointer;
