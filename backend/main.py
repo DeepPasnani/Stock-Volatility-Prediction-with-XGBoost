@@ -15,11 +15,11 @@ app.add_middleware(
 
 app.include_router(predict.router)
 
+@app.get("/api/health")
+def health():
+    return {"status": "ok"}
+
 # Serve built frontend in production (single-port deployment)
 frontend_dist = Path(__file__).resolve().parent.parent / "frontend" / "dist"
 if frontend_dist.exists():
     app.mount("/", StaticFiles(directory=str(frontend_dist), html=True), name="frontend")
-
-@app.get("/api/health")
-def health():
-    return {"status": "ok"}
