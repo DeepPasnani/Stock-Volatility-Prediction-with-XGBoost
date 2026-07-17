@@ -1,7 +1,7 @@
 export function Skeleton({ className = '', style = {} }) {
   return (
     <div
-      className={`bg-[#1e293b] animate-pulse ${className}`}
+      className={`bg-edge animate-pulse ${className}`}
       style={{ borderRadius: 0, ...style }}
     />
   )
@@ -13,7 +13,7 @@ export function ResultsSkeleton() {
       {/* Metrics row */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[...Array(4)].map((_, i) => (
-          <div key={i} className="bg-[#111827] border border-[#1e293b] p-4 space-y-2">
+          <div key={i} className="bg-surface border border-edge p-4 space-y-2">
             <Skeleton className="h-3 w-16" />
             <Skeleton className="h-7 w-24" />
           </div>
@@ -21,13 +21,13 @@ export function ResultsSkeleton() {
       </div>
 
       {/* Chart skeleton */}
-      <div className="bg-[#111827] border border-[#1e293b] p-4">
+      <div className="bg-surface border border-edge p-4">
         <Skeleton className="h-3 w-48 mb-4" />
         <Skeleton className="h-[300px] w-full" />
       </div>
 
       {/* Bar chart skeleton */}
-      <div className="bg-[#111827] border border-[#1e293b] p-4">
+      <div className="bg-surface border border-edge p-4">
         <Skeleton className="h-3 w-40 mb-4" />
         <div className="space-y-2">
           {[...Array(5)].map((_, i) => (

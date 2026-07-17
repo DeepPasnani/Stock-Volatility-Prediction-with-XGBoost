@@ -39,10 +39,10 @@ export function ComparisonTable({ results }) {
   }
 
   return (
-    <div className="bg-[#111827] border border-[#1e293b] overflow-x-auto">
+    <div className="bg-surface border border-edge overflow-x-auto">
       <table className="w-full font-mono text-sm">
         <thead>
-          <tr className="border-b border-[#1e293b] text-gray-400 text-xs uppercase">
+          <tr className="border-b border-edge text-muted text-xs uppercase">
             <th onClick={() => toggleSort('ticker')} className="cursor-pointer text-left p-3 hover:text-white transition-colors">Ticker{arrow('ticker')}</th>
             <th onClick={() => toggleSort('rmse')} className="cursor-pointer text-right p-3 hover:text-white transition-colors">RMSE{arrow('rmse')}</th>
             <th onClick={() => toggleSort('r2')} className="cursor-pointer text-right p-3 hover:text-white transition-colors">R²{arrow('r2')}</th>
@@ -52,12 +52,12 @@ export function ComparisonTable({ results }) {
         </thead>
         <tbody>
           {sorted.map((r) => (
-            <tr key={r.ticker} className="border-b border-[#1e293b]/50 hover:bg-[#1e293b]/30 transition-colors">
+            <tr key={r.ticker} className="border-b border-edge/50 hover:bg-edge/30 transition-colors">
               <td className="p-3 text-white font-semibold">{r.ticker}</td>
-              <td className={`p-3 text-right ${r.rmse === bestRmse ? 'text-green-400' : 'text-gray-300'}`}>
+              <td className={`p-3 text-right ${r.rmse === bestRmse ? 'text-green-bright' : 'text-gray-300'}`}>
                 {r.rmse.toFixed(4)}
               </td>
-              <td className={`p-3 text-right ${r.r2 === bestR2 ? 'text-green-400' : 'text-gray-300'}`}>
+              <td className={`p-3 text-right ${r.r2 === bestR2 ? 'text-green-bright' : 'text-gray-300'}`}>
                 {r.r2.toFixed(4)}
               </td>
               <td className="p-3 text-right text-gray-300">{r.train_rows}</td>

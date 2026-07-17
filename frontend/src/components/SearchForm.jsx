@@ -75,7 +75,7 @@ export function SearchForm({ onSubmit, loading }) {
             onChange={(e) => { setTickerInput(e.target.value); setValidationError('') }}
             disabled={loading}
             placeholder="AAPL,MSFT,GOOG"
-            className="bg-[#0b0f1a] border border-[#334155] px-3 py-2 font-mono text-sm text-white focus:border-[#22d3ee] focus:outline-none disabled:opacity-50"
+            className="bg-ink border border-stroke px-3 py-2 font-mono text-sm text-white focus:border-accent focus:outline-none disabled:opacity-50"
           />
         </div>
         <div className="flex flex-col gap-1">
@@ -85,7 +85,7 @@ export function SearchForm({ onSubmit, loading }) {
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
             disabled={loading}
-            className="bg-[#0b0f1a] border border-[#334155] px-3 py-2 font-mono text-sm text-white focus:border-[#22d3ee] focus:outline-none disabled:opacity-50"
+            className="bg-ink border border-stroke px-3 py-2 font-mono text-sm text-white focus:border-accent focus:outline-none disabled:opacity-50"
           />
         </div>
         <div className="flex flex-col gap-1">
@@ -95,30 +95,30 @@ export function SearchForm({ onSubmit, loading }) {
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
             disabled={loading}
-            className="bg-[#0b0f1a] border border-[#334155] px-3 py-2 font-mono text-sm text-white focus:border-[#22d3ee] focus:outline-none disabled:opacity-50"
+            className="bg-ink border border-stroke px-3 py-2 font-mono text-sm text-white focus:border-accent focus:outline-none disabled:opacity-50"
           />
         </div>
         <button
           type="submit"
           disabled={loading}
-          className="bg-[#0b0f1a] border border-[#22d3ee] px-4 py-2 font-mono text-sm text-[#22d3ee] uppercase tracking-wider hover:bg-[#22d3ee] hover:text-[#0b0f1a] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-ink border border-accent px-4 py-2 font-mono text-sm text-accent uppercase tracking-wider hover:bg-accent hover:text-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {loading ? 'Processing...' : '▶ Analyze'}
         </button>
       </form>
 
       {validationError && (
-        <p className="text-red-400 font-mono text-xs mt-2">{validationError}</p>
+        <p className="text-red/80 font-mono text-xs mt-2">{validationError}</p>
       )}
 
       {recentSearches.length > 0 && !loading && (
         <div className="flex gap-2 mt-3 flex-wrap">
-          <span className="text-xs text-gray-400 font-mono self-center">Recent:</span>
+          <span className="text-xs text-muted font-mono self-center">Recent:</span>
           {recentSearches.map((entry, i) => (
             <button
               key={i}
               onClick={() => handleRecentClick(entry)}
-              className="text-xs font-mono text-[#22d3ee] border border-[#22d3ee]/30 px-2 py-1 hover:bg-[#22d3ee]/10 transition-colors"
+              className="text-xs font-mono text-accent border border-accent/30 px-2 py-1 hover:bg-accent/10 transition-colors"
             >
               {entry.tickers}
             </button>

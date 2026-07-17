@@ -24,15 +24,15 @@ export function ResultsAccordion({ results }) {
   return (
     <div className="space-y-2">
       {results.map((result, i) => (
-        <div key={result.ticker} className="bg-[#111827] border border-[#1e293b]">
+        <div key={result.ticker} className="bg-surface border border-edge">
           <button
             onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
-            className="w-full flex items-center justify-between p-4 text-left hover:bg-[#1e293b]/50 transition-colors"
+            className="w-full flex items-center justify-between p-4 text-left hover:bg-edge/50 transition-colors"
           >
             <span className="font-mono text-white font-semibold">{result.ticker}</span>
             <span className="font-mono text-xs text-gray-300">
               RMSE {result.rmse.toFixed(4)} · R² {result.r2.toFixed(4)}
-              <span className="ml-3 text-[#22d3ee]">{openIndex === i ? '▲' : '▼'}</span>
+              <span className="ml-3 text-accent">{openIndex === i ? '▲' : '▼'}</span>
             </span>
           </button>
           {openIndex === i && (
@@ -42,7 +42,7 @@ export function ResultsAccordion({ results }) {
               <FeatureChart data={result} />
               <button
                 onClick={() => downloadCSV(result)}
-                className="font-mono text-xs text-[#22d3ee] border border-[#22d3ee] px-3 py-1 hover:bg-[#22d3ee]/10 transition-colors uppercase"
+                className="font-mono text-xs text-accent border border-accent px-3 py-1 hover:bg-accent/10 transition-colors uppercase"
               >
                 ↓ Download CSV
               </button>
