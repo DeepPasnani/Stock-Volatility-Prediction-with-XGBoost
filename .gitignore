@@ -3,3 +3,7 @@ __pycache__/
 node_modules/
 dist/
 .superpowers/
+.agents
+.github
+.imppeccable
+.claude
