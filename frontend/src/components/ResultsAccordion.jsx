@@ -30,7 +30,7 @@ export function ResultsAccordion({ results }) {
             className="w-full flex items-center justify-between p-4 text-left hover:bg-[#1e293b]/50 transition-colors"
           >
             <span className="font-mono text-white font-semibold">{result.ticker}</span>
-            <span className="font-mono text-xs text-gray-400">
+            <span className="font-mono text-xs text-gray-300">
               RMSE {result.rmse.toFixed(4)} · R² {result.r2.toFixed(4)}
               <span className="ml-3 text-[#22d3ee]">{openIndex === i ? '▲' : '▼'}</span>
             </span>

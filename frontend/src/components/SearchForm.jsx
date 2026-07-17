@@ -68,7 +68,7 @@ export function SearchForm({ onSubmit, loading }) {
     <div>
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
         <div className="flex flex-col gap-1">
-          <label className="text-xs uppercase tracking-tight text-gray-400 font-mono">Tickers</label>
+          <label className="text-xs uppercase tracking-tight text-gray-300 font-mono">Tickers</label>
           <input
             type="text"
             value={tickerInput}
@@ -79,7 +79,7 @@ export function SearchForm({ onSubmit, loading }) {
           />
         </div>
         <div className="flex flex-col gap-1">
-          <label className="text-xs uppercase tracking-tight text-gray-400 font-mono">Start Date</label>
+          <label className="text-xs uppercase tracking-tight text-gray-300 font-mono">Start Date</label>
           <input
             type="date"
             value={startDate}
@@ -89,7 +89,7 @@ export function SearchForm({ onSubmit, loading }) {
           />
         </div>
         <div className="flex flex-col gap-1">
-          <label className="text-xs uppercase tracking-tight text-gray-400 font-mono">End Date</label>
+          <label className="text-xs uppercase tracking-tight text-gray-300 font-mono">End Date</label>
           <input
             type="date"
             value={endDate}
@@ -113,7 +113,7 @@ export function SearchForm({ onSubmit, loading }) {
 
       {recentSearches.length > 0 && !loading && (
         <div className="flex gap-2 mt-3 flex-wrap">
-          <span className="text-xs text-gray-500 font-mono self-center">Recent:</span>
+          <span className="text-xs text-gray-400 font-mono self-center">Recent:</span>
           {recentSearches.map((entry, i) => (
             <button
               key={i}

@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-17T02:05:00Z",
+  "title": "Design System: Stock Volatility Prediction",
+  "extensions": {
+    "colorMeta": {
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "oklch(12% 0.02 260)", "tonalRamp": ["oklch(12% 0.02 260)", "oklch(20% 0.025 260)", "oklch(30% 0.03 260)", "oklch(45% 0.035 260)", "oklch(60% 0.04 260)", "oklch(75% 0.03 260)", "oklch(88% 0.02 260)", "oklch(95% 0.01 260)"] },
+      "surface": { "role": "neutral", "displayName": "Surface", "canonical": "oklch(18% 0.02 260)", "tonalRamp": ["oklch(12% 0.02 260)", "oklch(18% 0.02 260)", "oklch(25% 0.025 260)", "oklch(35% 0.03 260)", "oklch(50% 0.03 260)", "oklch(65% 0.025 260)", "oklch(80% 0.02 260)", "oklch(93% 0.01 260)"] },
+      "accent": { "role": "primary", "displayName": "Cyan Signal", "canonical": "oklch(75% 0.14 200)", "tonalRamp": ["oklch(30% 0.14 200)", "oklch(40% 0.14 200)", "oklch(50% 0.14 200)", "oklch(60% 0.14 200)", "oklch(75% 0.14 200)", "oklch(85% 0.10 200)", "oklch(92% 0.06 200)", "oklch(97% 0.03 200)"] },
+      "orange": { "role": "accent", "displayName": "Orange Data", "canonical": "oklch(70% 0.18 45)", "tonalRamp": ["oklch(30% 0.18 45)", "oklch(40% 0.18 45)", "oklch(50% 0.18 45)", "oklch(60% 0.18 45)", "oklch(70% 0.18 45)", "oklch(82% 0.12 45)", "oklch(90% 0.07 45)", "oklch(96% 0.03 45)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Page title only (Syne 700)" },
+      "body": { "displayName": "Body", "purpose": "All UI text, table cells, chart labels" },
+      "label": { "displayName": "Label", "purpose": "Section headings, form labels, column headers" },
+      "data": { "displayName": "Data", "purpose": "Large metric values" }
+    },
+    "shadows": [
+      { "name": "none", "value": "none", "purpose": "Shadows are prohibited per The Flat By Default Rule" }
+    ],
+    "motion": [
+      { "name": "state-transition", "value": "150ms ease-out", "purpose": "Default state transition timing" },
+      { "name": "hover-fade", "value": "background-color 150ms ease-out", "purpose": "Hover state transitions" }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary action button with cyan border, hover inverts to cyan fill.",
+      "html": "<button class=\"ds-btn-primary\">▶ Analyze</button>",
+      "css": ".ds-btn-primary { background: transparent; color: #22d3ee; border: 1px solid #22d3ee; padding: 8px 16px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 0; cursor: pointer; transition: background 150ms ease-out, color 150ms ease-out; } .ds-btn-primary:hover { background: #22d3ee; color: #0b0f1a; } .ds-btn-primary:focus-visible { outline: 2px solid #22d3ee; outline-offset: 2px; } .ds-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Subtle action with thin cyan border at 30% opacity.",
+      "html": "<button class=\"ds-btn-ghost\">↓ Download CSV</button>",
+      "css": ".ds-btn-ghost { background: transparent; color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.3); padding: 4px 12px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; border-radius: 0; cursor: pointer; transition: background 150ms ease-out; } .ds-btn-ghost:hover { background: rgba(34, 211, 238, 0.1); } .ds-btn-ghost:focus-visible { outline: 2px solid #22d3ee; outline-offset: 2px; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Dark terminal-style input with stroke border, cyan focus.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"AAPL,MSFT,GOOG\" />",
+      "css": ".ds-input { background: #0b0f1a; border: 1px solid #334155; padding: 8px 12px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.875rem; color: #f8fafc; border-radius: 0; width: 100%; transition: border-color 150ms ease-out; } .ds-input:focus { border-color: #22d3ee; outline: none; } .ds-input::placeholder { color: #9ca3af; } .ds-input:disabled { opacity: 0.5; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Surface container with border separation, no shadow.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-label\">RMSE</div><div class=\"ds-card-value\">0.0044</div></div>",
+      "css": ".ds-card { background: #111827; border: 1px solid #1e293b; padding: 16px; border-radius: 0; } .ds-card-label { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; color: #9ca3af; margin-bottom: 4px; } .ds-card-value { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 1.5rem; font-weight: 500; color: #22d3ee; }"
+    },
+    {
+      "name": "Table Header",
+      "kind": "custom",
+      "refersTo": "table-cell",
+      "description": "Sortable table header with label typography and hover arrow.",
+      "html": "<table style=\"width:100%; border-collapse:collapse;\"><thead><tr><th class=\"ds-th\">Ticker ▲</th><th class=\"ds-th ds-th-num\">RMSE</th><th class=\"ds-th ds-th-num\">R²</th></tr></thead></table>",
+      "css": ".ds-th { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; color: #9ca3af; padding: 12px; text-align: left; border-bottom: 1px solid #1e293b; cursor: pointer; transition: color 150ms ease-out; } .ds-th:hover { color: #f8fafc; } .ds-th-num { text-align: right; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Trading Terminal",
+    "overview": "A dark, focused data tool for volatility analysis. The design takes visual cues from Bloomberg terminals, developer consoles, and trading dashboards: high-density information, monospaced data, cyan-on-black signaling, and zero decoration. Everything serves the data.\n\nThe interface rejects SaaS pastels, rounded cards, gradient accents, and decorative illustration. It is not friendly in the conventional sense — it is efficient, precise, and rewards familiarity.",
+    "keyCharacteristics": [
+      "Dark-on-dark color field with cyan signal color",
+      "Monospaced text throughout labels, data, and UI copy",
+      "Zero border-radius — hard edges consistent with terminal ethos",
+      "Information-dense without clutter",
+      "Sequential multi-ticker workflow with clear progress state",
+      "Straight borders, no shadows, no glass effects"
+    ],
+    "rules": [
+      { "name": "The Flat By Default Rule", "body": "No shadows, no gradients, no glass effects. Depth is conveyed through tonal layering (Ink → Surface → border), not through elevation. Shadows are prohibited.", "section": "colors" },
+      { "name": "The Mono Rule", "body": "UI elements (labels, buttons, badges, tooltips) use IBM Plex Mono at 0.75rem, not the body size. This creates a consistent technical texture distinct from data values.", "section": "typography" }
+    ],
+    "dos": [
+      "Use cyan (#22d3ee) exclusively for interactive elements and the prediction line.",
+      "Use orange (#f97316) for actual values in charts.",
+      "Use hard 0px corners throughout — no border-radius anywhere.",
+      "Keep the dark field consistent — no light mode.",
+      "Use monospace for all UI text except the page title.",
+      "Show progress clearly during sequential multi-ticker operations.",
+      "Isolate errors per-ticker so partial results are still useful."
+    ],
+    "donts": [
+      "Use rounded corners, shadows, gradients, or glass effects.",
+      "Use light gray text (#9ca3af) on dark backgrounds for body copy — bump to #d1d5db or brighter.",
+      "Add decorative motion or page-load animations.",
+      "Use display fonts in UI labels, buttons, or data.",
+      "Use card grids with identical icon-headline-body patterns.",
+      "Put side-stripe borders (colored left/right border > 1px) on cards or items.",
+      "Use uppercase tracked eyebrows above every section.",
+      "Use numbered section markers (01 / 02 / 03) as default scaffolding."
+    ]
+  }
+}

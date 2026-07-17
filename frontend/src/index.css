@@ -1,18 +1,72 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700&display=swap');
 @import "tailwindcss";
 
+:root {
+  /* Design tokens — The Terminal palette */
+  --ink: #0b0f1a;
+  --surface: #111827;
+  --border: #1e293b;
+  --stroke: #334155;
+  --accent: #22d3ee;
+  --accent-muted: #155e75;
+  --orange: #f97316;
+  --muted: #9ca3af;
+  --foreground: #d1d5db;
+  --white: #f8fafc;
+  --green-bright: #4ade80;
+  --red: #ef4444;
+
+  /* Typography */
+  --font-display: 'Syne', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Transitions */
+  --ease-out: 150ms ease-out;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  background-color: #0b0f1a;
+  background-color: var(--ink);
+  color: var(--foreground);
+  font-family: var(--font-mono);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+/* Focus visible — consistent cyan ring */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   cursor: pointer;
 }
+
+/* Utility classes matching design tokens */
+.text-accent { color: var(--accent); }
+.text-muted { color: var(--muted); }
+.text-foreground { color: var(--foreground); }
+.text-white { color: var(--white); }
+.bg-ink { background-color: var(--ink); }
+.bg-surface { background-color: var(--surface); }
+.border-default { border-color: var(--border); }
+.border-stroke { border-color: var(--stroke); }
